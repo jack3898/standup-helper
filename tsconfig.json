@@ -1,0 +1,10 @@
+{
+	"compilerOptions": {
+        "strict": true,
+		"outDir": "./dist",
+		"sourceMap": true,
+		"module": "esnext",
+		"target": "esnext",
+	},
+	"include": ["src"]
+}

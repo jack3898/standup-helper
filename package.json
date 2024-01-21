@@ -1,0 +1,15 @@
+{
+  "name": "standup-helper",
+  "version": "1.0.0",
+  "description": "Auto rotate users during standup.",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}

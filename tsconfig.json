@@ -1,10 +1,10 @@
 {
 	"compilerOptions": {
-        "strict": true,
+		"strict": true,
 		"outDir": "./dist",
 		"sourceMap": true,
-		"module": "esnext",
+        "module": "nodenext",
 		"target": "esnext",
+		"jsx": "react-jsx"
 	},
-	"include": ["src"]
 }

@@ -1,0 +1,13 @@
+{
+	"typescript.tsdk": "node_modules/typescript/lib",
+
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": "explicit"
+	},
+
+	"files.eol": "\n",
+
+	"prettier.tabWidth": 4,
+	"prettier.useTabs": true,
+	"prettier.singleQuote": true
+}

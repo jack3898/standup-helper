@@ -2,18 +2,21 @@ import { useFormik } from 'formik';
 import { A, Form } from './components/index.js';
 import { toFormikValidationSchema } from 'zod-formik-adapter';
 import { z } from 'zod';
+import { useStorage } from './context/storage.js';
 
 const schema = z.object({
 	patToken: z.string()
 });
 
 export function PatForm(): JSX.Element {
+	const { storageData, setStorage } = useStorage();
+
 	const { handleSubmit, getFieldProps, errors } = useFormik({
 		initialValues: {
 			patToken: ''
 		},
 		onSubmit(values) {
-			alert(JSON.stringify(values, null, 2));
+			setStorage('patToken', values.patToken);
 		},
 		validationSchema: toFormikValidationSchema(schema)
 	});
@@ -30,6 +33,7 @@ export function PatForm(): JSX.Element {
 				</Form.Description>
 				<Form.Button type="submit">Save</Form.Button>
 			</Form>
+			{JSON.stringify(storageData)}
 		</>
 	);
 }

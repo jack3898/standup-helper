@@ -4,7 +4,8 @@
   "description": "Auto rotate users during standup.",
   "type": "module",
   "scripts": {
-    "build": "vite build"
+    "build": "vite build",
+    "dev": "vite build --mode development"
   },
   "keywords": [],
   "author": "",

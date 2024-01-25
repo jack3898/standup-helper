@@ -3,7 +3,11 @@ import { TypedStorage } from '../utils/index.js';
 import { z } from 'zod';
 
 const storageSchema = {
-	patToken: z.string().nullable()
+	patToken: z
+		.string()
+		.regex(/^[a-zA-Z0-9-_=]+$/)
+		.length(192)
+		.nullable()
 };
 
 export const storageZodSchema = z.object(storageSchema);

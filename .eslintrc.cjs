@@ -1,11 +1,20 @@
 // eslint-disable-next-line no-undef
 module.exports = {
 	env: { node: true },
-	extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended'],
+	extends: [
+		'eslint:recommended',
+		'plugin:@typescript-eslint/recommended',
+		'plugin:prettier/recommended',
+		'plugin:react/recommended',
+		'plugin:react-hooks/recommended'
+	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
 		ecmaVersion: 'latest',
-		sourceType: 'module'
+		sourceType: 'module',
+		ecmaFeatures: {
+			jsx: true
+		}
 	},
 	plugins: ['@typescript-eslint'],
 	rules: {
@@ -32,7 +41,9 @@ module.exports = {
 		'@typescript-eslint/no-explicit-any': 'error',
 		'@typescript-eslint/no-unused-vars': 'error',
 		'@typescript-eslint/explicit-function-return-type': 'error',
-		'@typescript-eslint/consistent-type-assertions': 'error'
+		'@typescript-eslint/consistent-type-assertions': 'error',
+		'react/react-in-jsx-scope': 'off',
+		'react/no-unescaped-entities': 'off'
 	},
 	ignorePatterns: ['dist']
 };

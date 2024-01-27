@@ -7,7 +7,13 @@ const storageSchema = {
 		.string()
 		.regex(/^[a-zA-Z0-9-_=]+$/)
 		.length(192)
-		.nullable()
+		.nullish()
+		.transform((v) => v ?? null),
+	csrfState: z
+		.string()
+		.uuid()
+		.nullish()
+		.transform((v) => v ?? null)
 };
 
 export const storageZodSchema = z.object(storageSchema);
@@ -23,27 +29,40 @@ const StorageContext = createContext<StorageContextType | null>(null);
 
 type StorageKeys = keyof StorageContextData;
 
-const typedStorage = new TypedStorage({
-	patToken: z.string().nullable()
-});
+const typedStorage = new TypedStorage(storageSchema);
 
 export function StorageProvider(props: { children: React.ReactNode }): JSX.Element {
-	const [storageState, setStorageData] = useState({
-		patToken: null
-	} as StorageContextData);
+	const [storageState, setStorageData] = useState<StorageContextData>({
+		patToken: null,
+		csrfState: null
+	});
 
 	useEffect(() => {
 		// Set updates to storage in the state
 		const handler = (changes: Record<string, chrome.storage.StorageChange>): void => {
+			console.debug('Storage changed');
+			console.debug(changes);
+
 			setStorageData({
-				patToken: changes.patToken?.newValue
+				patToken: changes.patToken?.newValue,
+				csrfState: changes.csrfState?.newValue
 			});
 		};
 
-		// Get initial storage data
-		typedStorage.get('patToken').then((result) => {
-			setStorageData({ patToken: result });
-		});
+		Promise.all([typedStorage.get('patToken'), typedStorage.setNew('csrfState', crypto.randomUUID())]).then(
+			([patToken, csrfState]) => {
+				console.debug('Storage initialized');
+				console.debug({
+					patToken,
+					csrfState
+				});
+
+				setStorageData({
+					patToken,
+					csrfState
+				});
+			}
+		);
 
 		chrome.storage.onChanged.addListener(handler);
 

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "dev": "vite build --mode development"
+    "dev": "vite build --mode development --watch"
   },
   "keywords": [],
   "author": "",

@@ -16,7 +16,7 @@ export function JiraUsers(): JSX.Element {
 				}
 			});
 		}
-	}, []);
+	}, [fetchUsers, storageData.patToken]);
 
 	if (loading) {
 		return <div>Loading...</div>;
@@ -42,7 +42,6 @@ export function JiraUsers(): JSX.Element {
 				>
 					Clear token
 				</A>
-				<code>{JSON.stringify(users, null, 2)}</code>
 			</main>
 		</>
 	);

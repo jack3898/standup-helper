@@ -40,7 +40,10 @@ export type FormButtonProps = React.ComponentPropsWithoutRef<'button'>;
 
 function FormButton({ children, ...props }: FormButtonProps): JSX.Element {
 	return (
-		<button {...props} className={`border-2 rounded-md p-2 ${props.className ?? ''}`.trimEnd()}>
+		<button
+			{...props}
+			className={`border-2 rounded-md p-2 ${props.className ?? ''} ${props.disabled ? 'bg-gray-200 cursor-not-allowed' : ''}`.trimEnd()}
+		>
 			{children}
 		</button>
 	);
@@ -62,9 +65,14 @@ function FormError({ children, ...props }: FormErrorProps): JSX.Element {
 	);
 }
 
+function FormHr(): JSX.Element {
+	return <hr className="my-4" />;
+}
+
 Form.Text = FormText;
 Form.Password = FormPassword;
 Form.Label = FormLabel;
 Form.Description = FormDescription;
 Form.Button = FormButton;
 Form.Error = FormError;
+Form.Hr = FormHr;
